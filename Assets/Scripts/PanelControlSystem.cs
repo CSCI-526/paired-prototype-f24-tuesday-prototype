@@ -48,7 +48,7 @@ public class PanelControlSystem : MonoBehaviour
         }
         else if (currentPairOnClickOthersDisappear == clickedPair)
         {
-            Close();
+            OnClickOthersDisappearClose();
         }
         else
         {
@@ -58,9 +58,16 @@ public class PanelControlSystem : MonoBehaviour
         }
     }
 
-    public void Close()
+    public void OnClickOthersDisappearClose()
     {
         currentPairOnClickOthersDisappear.panel.SetActive(false);
         currentPairOnClickOthersDisappear = null;
+    }
+
+    public void OnClickOthersPresentClose()
+    {
+        GameObject clickedButton = EventSystem.current.currentSelectedGameObject;
+        PanelButtonPair clickedPair = panelButtonPairOnClickOthersPresent.Find(pair => pair.button == clickedButton);
+        clickedPair.panel.SetActive(false);
     }
 }

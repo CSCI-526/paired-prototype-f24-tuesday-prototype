@@ -8,15 +8,14 @@ public class DaySystem : MonoBehaviour
     private DateTime currentDateTime;
     public float repeatRate = 6f;
 
-    void Start()
+    public void Init()
     {
         if (gameVariables == null)
         {
             Debug.LogError("GameVariables component is not assigned!");
             return;
         }
-
-        if (!DateTime.TryParse(gameVariables.currentDateTimeString, out currentDateTime))
+        if (!DateTime.TryParse(gameVariables.systemInfo.currentDateTimeString, out currentDateTime))
         {
             Debug.LogError("Invalid initial date format in GameVariables");
             return;
@@ -33,7 +32,8 @@ public class DaySystem : MonoBehaviour
             //Debug.Log(currentDateTime.ToString("yyyy-MM-dd"));
             yield return new WaitForSeconds(repeatRate);  // 首先等待6秒
             currentDateTime = currentDateTime.AddDays(1);  // 然后增加一天
-            gameVariables.currentDateTimeString = currentDateTime.ToString("yyyy-MM-dd");
+            gameVariables.systemInfo.currentDateTimeString = currentDateTime.ToString("yyyy-MM-dd");
+            gameObject.GetComponent<PopupEventSystem>().UpdateOnTick();
         }
     }
 }

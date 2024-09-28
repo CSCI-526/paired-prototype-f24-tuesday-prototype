@@ -786,7 +786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c479c56830d0d64490a1ec2e0eec856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameVariables: {fileID: 0}
+  infoType: 1
   variableName: money
 --- !u!114 &189743461
 MonoBehaviour:
@@ -842,12 +842,12 @@ GameObject:
   - component: {fileID: 200249246}
   - component: {fileID: 200249245}
   m_Layer: 5
-  m_Name: Panel - Event
+  m_Name: Panel - PopupEvent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &200249245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -903,10 +903,10 @@ RectTransform:
   - {fileID: 985405913}
   m_Father: {fileID: 1086457206}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.3, y: 0.2}
-  m_AnchorMax: {x: 0.7, y: 0.8}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &242521246
 GameObject:
@@ -1447,8 +1447,9 @@ GameObject:
   m_Component:
   - component: {fileID: 362844285}
   - component: {fileID: 362844284}
+  - component: {fileID: 362844286}
   m_Layer: 0
-  m_Name: Time
+  m_Name: IndependentSystems
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1483,6 +1484,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &362844286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362844283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02d6a83cfeaadbb40968451ab27cb73e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dateTriggerer:
+  - dateTime: 2024-01-02
+    popupEventId: covid
+  - dateTime: 2024-02-10
+    popupEventId: harris
 --- !u!1 &371749110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1652,8 +1670,87 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c479c56830d0d64490a1ec2e0eec856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameVariables: {fileID: 1273016517}
+  infoType: 0
   variableName: currentDateTimeString
+--- !u!1 &415499240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 415499241}
+  - component: {fileID: 415499243}
+  - component: {fileID: 415499242}
+  m_Layer: 5
+  m_Name: Title
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &415499241
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415499240}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1957124768}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -30}
+  m_SizeDelta: {x: -60, y: 50}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &415499242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415499240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 28
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Statistics
+--- !u!222 &415499243
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415499240}
+  m_CullTransparentMesh: 1
 --- !u!1 &526862532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1665,6 +1762,7 @@ GameObject:
   - component: {fileID: 526862533}
   - component: {fileID: 526862535}
   - component: {fileID: 526862534}
+  - component: {fileID: 526862536}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1688,8 +1786,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -60, y: -60}
+  m_AnchoredPosition: {x: 0, y: -25}
+  m_SizeDelta: {x: -60, y: -110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &526862534
 MonoBehaviour:
@@ -1735,6 +1833,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 526862532}
   m_CullTransparentMesh: 1
+--- !u!114 &526862536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526862532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c479c56830d0d64490a1ec2e0eec856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infoType: 2
+  variableName: 
 --- !u!1 &531598772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1785,7 +1897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c479c56830d0d64490a1ec2e0eec856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameVariables: {fileID: 0}
+  infoType: 1
   variableName: population
 --- !u!114 &531598775
 MonoBehaviour:
@@ -2332,7 +2444,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Choice 1
+  m_Text: I see
 --- !u!222 &677971692
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2776,7 +2888,7 @@ GameObject:
   - component: {fileID: 985405915}
   - component: {fileID: 985405914}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3093,7 +3205,7 @@ MonoBehaviour:
     button: {fileID: 288457579}
   panelButtonPairOnClickOthersPresent:
   - panel: {fileID: 200249244}
-    button: {fileID: 0}
+    button: {fileID: 1594748695}
 --- !u!1 &1113851251
 GameObject:
   m_ObjectHideFlags: 0
@@ -3276,7 +3388,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1086457207}
         m_TargetAssemblyTypeName: PanelControlSystem, Assembly-CSharp
-        m_MethodName: Close
+        m_MethodName: OnClickOthersDisappearClose
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3509,12 +3621,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4a8f5bcf38f2334ea08323fac077d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDateTimeString: 2024-01-01
-  money: 100000
-  population: 100000
-  happiness: 100
-  crimeRate: 0
-  healthRate: 0
 --- !u!4 &1273016518
 Transform:
   m_ObjectHideFlags: 0
@@ -4209,7 +4315,7 @@ GameObject:
   - component: {fileID: 1594748698}
   - component: {fileID: 1594748697}
   m_Layer: 5
-  m_Name: Button - Close
+  m_Name: Button - Choice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4293,7 +4399,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1086457207}
         m_TargetAssemblyTypeName: PanelControlSystem, Assembly-CSharp
-        m_MethodName: Close
+        m_MethodName: OnClickOthersPresentClose
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4466,7 +4572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c479c56830d0d64490a1ec2e0eec856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameVariables: {fileID: 0}
+  infoType: 1
   variableName: happiness
 --- !u!114 &1885054696
 MonoBehaviour:
@@ -4522,7 +4628,7 @@ GameObject:
   - component: {fileID: 1891801974}
   - component: {fileID: 1891801973}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4773,6 +4879,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 415499241}
   - {fileID: 526862533}
   m_Father: {fileID: 1086457206}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

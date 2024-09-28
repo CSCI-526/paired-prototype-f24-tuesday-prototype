@@ -1,51 +1,40 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Reflection;
+using System.Collections.Generic;
 
 public class DisplayVariable : MonoBehaviour
 {
-    public GameVariables gameVariables;
+    public enum InfoType { SYSTEM_INFO, RESOURCE_INFO, STATISTIC_INFO };
+    public InfoType infoType;
+
+    [Tooltip("Only required when InfoType is set to RESOURCE_INFO. Specifies which resource to display.")]
     public string variableName;
+
+    private GameVariables gameVariables;
     private Text displayText;
 
     void Start()
     {
+        gameVariables = GameObject.Find("Variables").GetComponent<GameVariables>();
         displayText = GetComponent<Text>();
-        if (displayText == null)
-        {
-            Debug.LogError("DisplayVariable script requires a Text component on the same GameObject.");
-            return;
-        }
-
-        if (gameVariables == null)
-        {
-            Debug.LogError("GameVariables component is not set in DisplayVariable script.");
-            return;
-        }
     }
 
     void Update()
     {
-        if (gameVariables != null && !string.IsNullOrEmpty(variableName))
+        if (infoType == InfoType.SYSTEM_INFO || infoType == InfoType.RESOURCE_INFO)
         {
-            FieldInfo field = gameVariables.GetType().GetField(variableName, BindingFlags.Public | BindingFlags.Instance);
-            if (field != null)
-            {
-                object value = field.GetValue(gameVariables);
-                if (value != null)
-                {
-                    // Convert any type of value to a string for displaying
-                    displayText.text = value.ToString();
-                }
-                else
-                {
-                    Debug.LogWarning("The specified variable exists but its value is null.");
-                }
-            }
-            else
-            {
-                Debug.LogWarning("The specified variable is not found.");
-            }
+            KeyValuePair<Info, FieldInfo>? variable = gameVariables.GetVariable(variableName);
+            try { displayText.text = variable.Value.Value.GetValue(variable.Value.Key).ToString(); }
+            catch { Debug.Log($"Display: Invalid Variable {variableName}"); }
+        }
+        else
+        {
+            string newText = "";
+            FieldInfo[] fields = gameVariables.statisticsInfo.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
+            foreach (FieldInfo field in fields)
+                newText += $"{field.Name}: {field.GetValue(gameVariables.statisticsInfo)}\n";
+            displayText.text = newText;
         }
     }
 }

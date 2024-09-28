@@ -9,6 +9,9 @@ public interface Info { }
 public class SystemInfo : Info
 {
     public string currentDateTimeString = "2024-01-01";
+    public int pause = 1; // 0 means continue, 1 means pause
+    public string pauseShow = "Paused";
+
 }
 
 public class ResourcesInfo : Info
@@ -20,9 +23,9 @@ public class ResourcesInfo : Info
 
 public class StatisticsInfo : Info
 {
-    public int crimeRate = 0; // Current crime rate percentage
+    public int crimeRate = 2; // Current crime rate percentage
     public int healthRate = 0; // Current health rate percentage
-    public int fireRisk = 0;
+    public int fireRisk = 0; // Current fire rate percentage
 }
 
 public class GameVariables : MonoBehaviour
@@ -37,6 +40,7 @@ public class GameVariables : MonoBehaviour
         resourcesInfo = new ResourcesInfo();
         statisticsInfo = new StatisticsInfo();
         GameObject.Find("IndependentSystems").GetComponent<DaySystem>().Init();
+        GameObject.Find("IndependentSystems").GetComponent<Calculation>().Init();
     }
 
     // ? is guided by chatGPT

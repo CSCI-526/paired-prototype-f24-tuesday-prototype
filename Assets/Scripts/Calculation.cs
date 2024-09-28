@@ -45,7 +45,7 @@ public class Calculation : MonoBehaviour
                 }
                 else
                 {
-                    elapsedTime = 0; // Reset the timer if paused
+                    elapsedTime = 0;
                     break;
                 }
             }

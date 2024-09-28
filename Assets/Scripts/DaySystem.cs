@@ -62,7 +62,6 @@ public class DaySystem : MonoBehaviour
 
             if (elapsedTime >= repeatRate)
             {
-                // Update time and reset timer
                 currentDateTime = currentDateTime.AddDays(1);
                 gameVariables.systemInfo.currentDateTimeString = currentDateTime.ToString("yyyy-MM-dd");
                 gameObject.GetComponent<PopupEventSystem>().UpdateOnTick();
@@ -75,7 +74,6 @@ public class DaySystem : MonoBehaviour
 
     void UpdateSliderColor(float normalizedTime)
     {
-        // Example color transition: Night (0%) -> Day (50%) -> Night (100%)
         Color dayColor = Color.cyan;
         Color nightColor = Color.blue;
         sliderFillImage.color = Color.Lerp(nightColor, dayColor, Mathf.PingPong(normalizedTime * 2, 1));
@@ -83,7 +81,6 @@ public class DaySystem : MonoBehaviour
 
     void UpdateTimeText(float elapsedTime)
     {
-        // 根据 elapsedTime 计算小时和分钟
         int hours = (int)(24 * elapsedTime / repeatRate);
         int minutes = (int)(1440 * elapsedTime / repeatRate) % 60;
         timeText.text = string.Format("{0:00}:{1:00}", hours, minutes);

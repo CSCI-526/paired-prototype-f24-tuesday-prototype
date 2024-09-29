@@ -30,11 +30,9 @@ public class DisplayVariable : MonoBehaviour
         }
         else if (infoType == InfoType.STATISTIC_INFO)
         {
-            string newText = "";
-            FieldInfo[] fields = gameVariables.statisticsInfo.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
-            foreach (FieldInfo field in fields)
-                newText += $"{field.Name}: {field.GetValue(gameVariables.statisticsInfo)}\n";
-            displayText.text = newText;
+            KeyValuePair<Info, FieldInfo>? variable = gameVariables.GetVariable(variableName);
+            try { displayText.text = variable.Value.Value.GetValue(variable.Value.Key).ToString(); }
+            catch { Debug.Log($"Display: Invalid Variable {variableName}"); }
         }
         else
         {

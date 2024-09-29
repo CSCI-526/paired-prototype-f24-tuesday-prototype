@@ -8,13 +8,14 @@ public class DaySystem : MonoBehaviour
     public GameObject sliderGameObject;
     public Text timeText;
     public int currentMonth;
-    public bool todayIsNewMonth = true;
+    public bool todayIsNewMonth = false;
     public float repeatRate = 6f;
 
     private GameVariables gameVariables;
     private Slider timeSlider;
     private DateTime currentDateTime;
     private Image sliderFillImage;
+    private Calculation calculation;
 
 
     public void Init()
@@ -35,6 +36,8 @@ public class DaySystem : MonoBehaviour
             Debug.LogError("Invalid initial date format in GameVariables");
             return;
         }
+
+        calculation = GetComponent<Calculation>();
 
         currentMonth = currentDateTime.Month;
 
@@ -66,11 +69,16 @@ public class DaySystem : MonoBehaviour
             if (elapsedTime >= repeatRate)
             {
                 currentDateTime = currentDateTime.AddDays(1);
+                calculation.CalculateHappiness();
                 if (currentMonth != currentDateTime.Month)
                 {
                     currentMonth = currentDateTime.Month;
                 }
                 todayIsNewMonth = CheckIfMonthWillChange();
+                if (todayIsNewMonth)
+                {
+                    calculation.ApplyTaxes();
+                }
                 gameVariables.systemInfo.currentDateTimeString = currentDateTime.ToString("yyyy-MM-dd");
                 
                 GetComponent<DecisionManager>().EvaluateDecision();
@@ -83,21 +91,21 @@ public class DaySystem : MonoBehaviour
         }
     }
 
-    bool CheckIfMonthWillChange()
+    private bool CheckIfMonthWillChange()
     {
         DateTime nextDay = currentDateTime.AddDays(-1);
         return nextDay.Month != currentDateTime.Month;
     }
 
 
-    void UpdateSliderColor(float normalizedTime)
+    private void UpdateSliderColor(float normalizedTime)
     {
         Color dayColor = Color.cyan;
         Color nightColor = Color.blue;
         sliderFillImage.color = Color.Lerp(nightColor, dayColor, Mathf.PingPong(normalizedTime * 2, 1));
     }
 
-    void UpdateTimeText(float elapsedTime)
+    private void UpdateTimeText(float elapsedTime)
     {
         int hours = (int)(24 * elapsedTime / repeatRate);
         int minutes = (int)(1440 * elapsedTime / repeatRate) % 60;

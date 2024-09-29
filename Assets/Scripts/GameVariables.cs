@@ -23,9 +23,9 @@ public class ResourcesInfo : Info
 
 public class StatisticsInfo : Info
 {
-    public int crimeRate = 2; // Current crime rate percentage
+    public int crimeRate = 0; // Current crime rate percentage
     public int healthRate = 0; // Current health rate percentage
-    public int fireRisk = 0; // Current fire rate percentage
+    public int fireRisk = 50; // Current fire rate percentage
 }
 
 public class BudgetInfo : Info
@@ -56,7 +56,6 @@ public class GameVariables : MonoBehaviour
         budgetInfo = new BudgetInfo();
         
         GameObject.Find("IndependentSystems").GetComponent<DaySystem>().Init();
-        GameObject.Find("IndependentSystems").GetComponent<Calculation>().Init();
         GameObject.Find("IndependentSystems").GetComponent<MapSystem>().Init();
     }
 

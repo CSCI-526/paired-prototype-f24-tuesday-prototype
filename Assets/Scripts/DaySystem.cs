@@ -7,11 +7,15 @@ public class DaySystem : MonoBehaviour
 {
     public GameObject sliderGameObject;
     public Text timeText;
+    public int currentMonth;
+    public bool todayIsNewMonth = true;
+    public float repeatRate = 6f;
+
     private GameVariables gameVariables;
     private Slider timeSlider;
     private DateTime currentDateTime;
     private Image sliderFillImage;
-    public float repeatRate = 6f;
+
 
     public void Init()
     {
@@ -31,6 +35,8 @@ public class DaySystem : MonoBehaviour
             Debug.LogError("Invalid initial date format in GameVariables");
             return;
         }
+
+        currentMonth = currentDateTime.Month;
 
         StartCoroutine(UpdateDateTimeEverySixSeconds());
     }
@@ -60,6 +66,11 @@ public class DaySystem : MonoBehaviour
             if (elapsedTime >= repeatRate)
             {
                 currentDateTime = currentDateTime.AddDays(1);
+                if (currentMonth != currentDateTime.Month)
+                {
+                    currentMonth = currentDateTime.Month;
+                }
+                todayIsNewMonth = CheckIfMonthWillChange();
                 gameVariables.systemInfo.currentDateTimeString = currentDateTime.ToString("yyyy-MM-dd");
                 
                 GetComponent<DecisionManager>().EvaluateDecision();
@@ -67,9 +78,17 @@ public class DaySystem : MonoBehaviour
                 elapsedTime = 0;
                 if (timeSlider != null)
                     timeSlider.value = 0;
+                UpdateTimeText(elapsedTime);
             }
         }
     }
+
+    bool CheckIfMonthWillChange()
+    {
+        DateTime nextDay = currentDateTime.AddDays(-1);
+        return nextDay.Month != currentDateTime.Month;
+    }
+
 
     void UpdateSliderColor(float normalizedTime)
     {

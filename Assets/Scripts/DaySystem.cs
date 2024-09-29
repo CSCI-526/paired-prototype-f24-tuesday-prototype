@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class DaySystem : MonoBehaviour
 {
-    public GameVariables gameVariables;
     public GameObject sliderGameObject;
     public Text timeText;
+    private GameVariables gameVariables;
     private Slider timeSlider;
     private DateTime currentDateTime;
     private Image sliderFillImage;
@@ -25,12 +25,8 @@ public class DaySystem : MonoBehaviour
         {
             timeSlider.maxValue = repeatRate;
         }
-                
-        if (gameVariables == null)
-        {
-            Debug.LogError("GameVariables component is not assigned!");
-            return;
-        }
+
+        gameVariables = GameObject.Find("Variables").GetComponent<GameVariables>();
         if (!DateTime.TryParse(gameVariables.systemInfo.currentDateTimeString, out currentDateTime))
         {
             Debug.LogError("Invalid initial date format in GameVariables");
@@ -58,6 +54,7 @@ public class DaySystem : MonoBehaviour
                         timeSlider.value = elapsedTime;
                         UpdateTimeText(elapsedTime);
                     // UpdateSliderColor(elapsedTime / repeatRate);
+                    GetComponent<MapSystem>().UpdateOnTick();
                 }
             }
 

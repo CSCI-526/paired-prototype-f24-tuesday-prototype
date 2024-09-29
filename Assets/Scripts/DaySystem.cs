@@ -51,9 +51,11 @@ public class DaySystem : MonoBehaviour
                     elapsedTime += step;
                     if (timeSlider != null)
                         timeSlider.value = elapsedTime;
-                        UpdateTimeText(elapsedTime);
-                    // UpdateSliderColor(elapsedTime / repeatRate);
-                    GetComponent<MapSystem>().UpdateOnTick();
+                    UpdateTimeText(elapsedTime);
+                }
+                else
+                {
+                    break;
                 }
             }
 
@@ -61,12 +63,12 @@ public class DaySystem : MonoBehaviour
             {
                 currentDateTime = currentDateTime.AddDays(1);
                 gameVariables.systemInfo.currentDateTimeString = currentDateTime.ToString("yyyy-MM-dd");
-                
-                GetComponent<DecisionManager>().EvaluateDecision();
+
                 GetComponent<PopupEventSystem>().UpdateOnTick();
                 elapsedTime = 0;
                 if (timeSlider != null)
                     timeSlider.value = 0;
+                UpdateTimeText(elapsedTime);
             }
         }
     }

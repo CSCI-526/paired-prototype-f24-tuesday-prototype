@@ -32,16 +32,15 @@ public class DaySystem : MonoBehaviour
             return;
         }
 
-        StartCoroutine(UpdateDateTimeEverySixSeconds());
+        StartCoroutine(UpdateDateTime());
     }
 
-    IEnumerator UpdateDateTimeEverySixSeconds()
+    IEnumerator UpdateDateTime()
     {
         float elapsedTime = 0;
         float step = 0.01f;
         while (true)
         {
-            //Debug.Log(currentDateTime.ToString("yyyy-MM-dd"));
             yield return new WaitUntil(() => gameVariables.systemInfo.pause == 0);
             while (elapsedTime < repeatRate)
             {
@@ -82,8 +81,9 @@ public class DaySystem : MonoBehaviour
 
     void UpdateTimeText(float elapsedTime)
     {
-        int hours = (int)(24 * elapsedTime / repeatRate);
-        int minutes = (int)(1440 * elapsedTime / repeatRate) % 60;
+        int totalMinutes = (int)(1440 * elapsedTime / repeatRate);
+        int hours = (totalMinutes / 60) % 24;
+        int minutes = totalMinutes % 60;
         timeText.text = string.Format("{0:00}:{1:00}", hours, minutes);
     }
 

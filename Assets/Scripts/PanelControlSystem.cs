@@ -39,8 +39,12 @@ public class PanelControlSystem : MonoBehaviour
 
     public void OnClickOthersDisappear()
     {
-        GameObject clickedButton = EventSystem.current.currentSelectedGameObject;
-        PanelButtonPair clickedPair = panelButtonPairOnClickOthersDisappear.Find(pair => pair.button == clickedButton);
+        OpenPanel(EventSystem.current.currentSelectedGameObject);
+    }
+
+    public void OpenPanel(GameObject panel)
+    {
+        PanelButtonPair clickedPair = panelButtonPairOnClickOthersDisappear.Find(pair => pair.button == panel);
         if (currentPairOnClickOthersDisappear == null)
         {
             clickedPair.panel.SetActive(true);

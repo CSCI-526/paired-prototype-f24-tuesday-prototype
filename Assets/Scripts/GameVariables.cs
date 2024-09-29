@@ -41,6 +41,7 @@ public class GameVariables : MonoBehaviour
         statisticsInfo = new StatisticsInfo();
         GameObject.Find("IndependentSystems").GetComponent<DaySystem>().Init();
         GameObject.Find("IndependentSystems").GetComponent<Calculation>().Init();
+        GameObject.Find("IndependentSystems").GetComponent<MapSystem>().Init();
     }
 
     // ? is guided by chatGPT

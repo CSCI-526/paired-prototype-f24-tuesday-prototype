@@ -34,6 +34,7 @@ public class PopupEventSystem : MonoBehaviour
         DateTriggerer triggerer = dateTriggerer.Find(triggerer => triggerer.dateTime == gameVariables.systemInfo.currentDateTimeString);
         if (triggerer != null)
         {
+            GameObject.Find("IndependentSystems").GetComponent<DaySystem>().TogglePause();
             PopupEvent popupEvent = eventList.GetEventById(triggerer.popupEventId);
             popupEventPanel.transform.Find("Title").GetComponent<Text>().text = popupEvent.title;
             popupEventPanel.transform.Find("Description").GetComponent<Text>().text = popupEvent.description;

@@ -22,10 +22,12 @@ public class DecisionManager : MonoBehaviour
     private GameVariables gameVariables; // Reference to your GameVariables class
     public Button decision1Button; // Button for option A
     public Button decision2Button; // Button for option B
+    private DaySystem daySystem;
 
     void Start()
     {
         gameVariables = GameObject.Find("Variables").GetComponent<GameVariables>();
+        daySystem = GameObject.Find("IndependentSystems").GetComponent<DaySystem>();
         HideDecisionButtons(); // Initially hide the buttons
     }
 
@@ -38,9 +40,11 @@ public class DecisionManager : MonoBehaviour
         {
             if (decision.date == currentDate)
             {
-                // Show options A and B and their effects
+                daySystem.TogglePause();
+                // panelControlSystem.OpenPanel(decisionPanel);
+                decisionPanel.SetActive(true);
                 ShowDecisionOptions(decision);
-                return; // Exit loop once the current date decision is found
+                return;
             }
         }
     }
@@ -84,8 +88,10 @@ public class DecisionManager : MonoBehaviour
 
         Debug.Log($"Health Budget: {trueHealthBudget}%, Crime Budget: {trueCrimeBudget}%, Reserved Budget: {reservedBudget}%");
 
-        // Hide buttons after a decision has been made
+        // Hide buttons after a decision has been made & unpause
         HideDecisionButtons();
+        daySystem.TogglePause();
+        decisionPanel.SetActive(false);
     }
 
     private void HideDecisionButtons()

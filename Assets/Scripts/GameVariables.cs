@@ -18,7 +18,7 @@ public class ResourcesInfo : Info
 {
     public float money = 100000; // Amount of money available
     public int population = 100000; // Current city population
-    public int happiness = 1000; // Overall city happiness index
+    public int happiness = 100; // Overall city happiness index
 }
 
 public class StatisticsInfo : Info

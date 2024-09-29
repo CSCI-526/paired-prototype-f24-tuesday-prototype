@@ -1397,6 +1397,7 @@ MonoBehaviour:
   sliderGameObject: {fileID: 765073115}
   timeText: {fileID: 1076966869}
   repeatRate: 20
+  decisionManager: {fileID: 371749114}
 --- !u!4 &362844285
 Transform:
   m_ObjectHideFlags: 0
@@ -1454,6 +1455,7 @@ GameObject:
   - component: {fileID: 371749111}
   - component: {fileID: 371749113}
   - component: {fileID: 371749112}
+  - component: {fileID: 371749114}
   m_Layer: 5
   m_Name: Panel - Decision
   m_TagString: Untagged
@@ -1520,6 +1522,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 371749110}
   m_CullTransparentMesh: 1
+--- !u!114 &371749114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371749110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11e47344668f44142b850432bfdf061e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decisions:
+  - optionA: Health Initiative
+    optionB: Crime Reduction
+    healthBudgetEffectA: 80
+    crimeBudgetEffectA: 20
+    healthBudgetEffectB: 20
+    crimeBudgetEffectB: 80
+    date: 2024-01-02
+  decision1Button: {fileID: 1014317174}
+  decision2Button: {fileID: 1473043527}
 --- !u!1 &404853478
 GameObject:
   m_ObjectHideFlags: 0

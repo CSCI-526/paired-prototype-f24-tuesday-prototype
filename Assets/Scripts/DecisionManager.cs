@@ -15,17 +15,17 @@ public class Decision
     public string date; // Store the date as a string (YYYY-MM-DD)
 }
 
-
 public class DecisionManager : MonoBehaviour
 {
     public List<Decision> decisions; // List of all decisions based on date
     private GameVariables gameVariables; // Reference to your GameVariables class
-    public Button decision1Button;
-    public Button decision2Button;
+    public Button decision1Button; // Button for option A
+    public Button decision2Button; // Button for option B
 
     void Start()
     {
         gameVariables = GameObject.Find("Variables").GetComponent<GameVariables>();
+        HideDecisionButtons(); // Initially hide the buttons
     }
 
     public void EvaluateDecision()
@@ -39,7 +39,7 @@ public class DecisionManager : MonoBehaviour
             {
                 // Show options A and B and their effects
                 ShowDecisionOptions(decision);
-                break; // Exit loop once the current date decision is found
+                return; // Exit loop once the current date decision is found
             }
         }
     }
@@ -60,6 +60,10 @@ public class DecisionManager : MonoBehaviour
         // Add listeners with effects for each option
         decision1Button.onClick.AddListener(() => ApplyDecisionEffects(decision.healthBudgetEffectA, decision.crimeBudgetEffectA));
         decision2Button.onClick.AddListener(() => ApplyDecisionEffects(decision.healthBudgetEffectB, decision.crimeBudgetEffectB));
+
+        // Show buttons when a new decision is available
+        decision1Button.gameObject.SetActive(true);
+        decision2Button.gameObject.SetActive(true);
     }
 
     private void ApplyDecisionEffects(float healthEffect, float crimeEffect)
@@ -78,5 +82,15 @@ public class DecisionManager : MonoBehaviour
         gameVariables.budgetInfo.reserved_budget = reservedBudget;
 
         Debug.Log($"Health Budget: {trueHealthBudget}%, Crime Budget: {trueCrimeBudget}%, Reserved Budget: {reservedBudget}%");
+
+        // Hide buttons after a decision has been made
+        HideDecisionButtons();
+    }
+
+    private void HideDecisionButtons()
+    {
+        decision1Button.gameObject.SetActive(false);
+        decision2Button.gameObject.SetActive(false);
     }
 }
+

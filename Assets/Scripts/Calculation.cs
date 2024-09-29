@@ -45,15 +45,17 @@ public class Calculation : MonoBehaviour
                 }
                 else
                 {
-                    elapsedTime = 0; // Reset the timer if paused
+                    elapsedTime = 0;
                     break;
                 }
             }
             if (elapsedTime >= repeatRate)
             {
                 UpdateRates();
-                int tmp = Mathf.Clamp(happiness - (int)(crimeRate + healthRate + fireRisk), 0, 100);
-                gameVariables.resourcesInfo.happiness = tmp;
+                float populationFactor = Mathf.Log10(Mathf.Max(1, population));
+                int impact = (int)((crimeRate + healthRate + fireRisk) * populationFactor);
+                int newHappiness = Mathf.Clamp(happiness - impact, 0, 100);
+                gameVariables.resourcesInfo.happiness = newHappiness;
                 elapsedTime = 0;
             }
         }

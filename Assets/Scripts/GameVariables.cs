@@ -28,17 +28,33 @@ public class StatisticsInfo : Info
     public int fireRisk = 0; // Current fire rate percentage
 }
 
+public class BudgetInfo : Info
+{
+    public float totalBudget = 1000f;
+    public float health_budget = 0f;
+    public float crime_budget = 0f;
+    public float reserved_budget;
+
+    public BudgetInfo()
+    {
+        reserved_budget = totalBudget;
+    }
+}
+
 public class GameVariables : MonoBehaviour
 {
     public SystemInfo systemInfo;
     public ResourcesInfo resourcesInfo;
     public StatisticsInfo statisticsInfo;
+    public BudgetInfo budgetInfo;
 
     private void Start()
     {
         systemInfo = new SystemInfo();
         resourcesInfo = new ResourcesInfo();
         statisticsInfo = new StatisticsInfo();
+        budgetInfo = new BudgetInfo();
+        
         GameObject.Find("IndependentSystems").GetComponent<DaySystem>().Init();
         GameObject.Find("IndependentSystems").GetComponent<Calculation>().Init();
         GameObject.Find("IndependentSystems").GetComponent<MapSystem>().Init();

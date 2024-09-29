@@ -32,15 +32,16 @@ public class DaySystem : MonoBehaviour
             return;
         }
 
-        StartCoroutine(UpdateDateTime());
+        StartCoroutine(UpdateDateTimeEverySixSeconds());
     }
 
-    IEnumerator UpdateDateTime()
+    IEnumerator UpdateDateTimeEverySixSeconds()
     {
         float elapsedTime = 0;
         float step = 0.01f;
         while (true)
         {
+            //Debug.Log(currentDateTime.ToString("yyyy-MM-dd"));
             yield return new WaitUntil(() => gameVariables.systemInfo.pause == 0);
             while (elapsedTime < repeatRate)
             {
@@ -50,11 +51,9 @@ public class DaySystem : MonoBehaviour
                     elapsedTime += step;
                     if (timeSlider != null)
                         timeSlider.value = elapsedTime;
-                    UpdateTimeText(elapsedTime);
-                }
-                else
-                {
-                    break;
+                        UpdateTimeText(elapsedTime);
+                    // UpdateSliderColor(elapsedTime / repeatRate);
+                    GetComponent<MapSystem>().UpdateOnTick();
                 }
             }
 
@@ -62,12 +61,12 @@ public class DaySystem : MonoBehaviour
             {
                 currentDateTime = currentDateTime.AddDays(1);
                 gameVariables.systemInfo.currentDateTimeString = currentDateTime.ToString("yyyy-MM-dd");
-
+                
+                GetComponent<DecisionManager>().EvaluateDecision();
                 GetComponent<PopupEventSystem>().UpdateOnTick();
                 elapsedTime = 0;
                 if (timeSlider != null)
                     timeSlider.value = 0;
-                UpdateTimeText(elapsedTime);
             }
         }
     }
@@ -81,9 +80,8 @@ public class DaySystem : MonoBehaviour
 
     void UpdateTimeText(float elapsedTime)
     {
-        int totalMinutes = (int)(1440 * elapsedTime / repeatRate);
-        int hours = (totalMinutes / 60) % 24;
-        int minutes = totalMinutes % 60;
+        int hours = (int)(24 * elapsedTime / repeatRate);
+        int minutes = (int)(1440 * elapsedTime / repeatRate) % 60;
         timeText.text = string.Format("{0:00}:{1:00}", hours, minutes);
     }
 

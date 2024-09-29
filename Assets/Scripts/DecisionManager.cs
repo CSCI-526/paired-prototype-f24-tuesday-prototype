@@ -17,6 +17,7 @@ public class Decision
 
 public class DecisionManager : MonoBehaviour
 {
+    public GameObject decisionPanel;
     public List<Decision> decisions; // List of all decisions based on date
     private GameVariables gameVariables; // Reference to your GameVariables class
     public Button decision1Button; // Button for option A

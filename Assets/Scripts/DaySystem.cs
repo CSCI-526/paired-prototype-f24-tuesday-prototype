@@ -12,7 +12,6 @@ public class DaySystem : MonoBehaviour
     private DateTime currentDateTime;
     private Image sliderFillImage;
     public float repeatRate = 6f;
-    public DecisionManager decisionManager;
 
     public void Init()
     {
@@ -63,9 +62,8 @@ public class DaySystem : MonoBehaviour
                 currentDateTime = currentDateTime.AddDays(1);
                 gameVariables.systemInfo.currentDateTimeString = currentDateTime.ToString("yyyy-MM-dd");
                 
-                decisionManager.EvaluateDecision();
-                
-                gameObject.GetComponent<PopupEventSystem>().UpdateOnTick();
+                GetComponent<DecisionManager>().EvaluateDecision();
+                GetComponent<PopupEventSystem>().UpdateOnTick();
                 elapsedTime = 0;
                 if (timeSlider != null)
                     timeSlider.value = 0;

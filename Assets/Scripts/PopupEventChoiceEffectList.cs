@@ -4,22 +4,24 @@ using System.Reflection;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
-public interface ChoiceEffect
+public class ChoiceEffect
 {
-    public void ApplyEffect();
+    public string gameVariableName;
+    public float value;
+
+    public virtual void ApplyEffect() { }
 }
 
 public class ChoiceEffectAdd_f : ChoiceEffect
 {
-    public string gameVariableName;
-    public float value;
+    
     public ChoiceEffectAdd_f(string gameVariableName, float value)
     {
         this.gameVariableName = gameVariableName;
         this.value = value;
     }
 
-    public void ApplyEffect()
+    public override void ApplyEffect()
     {
         GameVariables gameVariables = GameObject.Find("Variables").GetComponent<GameVariables>();
         // Guided by ChatGPT
@@ -40,15 +42,13 @@ public class ChoiceEffectAdd_f : ChoiceEffect
 
 public class ChoiceEffectAdd_i : ChoiceEffect
 {
-    public string gameVariableName;
-    public int value;
     public ChoiceEffectAdd_i(string gameVariableName, int value)
     {
         this.gameVariableName = gameVariableName;
         this.value = value;
     }
 
-    public void ApplyEffect()
+    public override void ApplyEffect()
     {
         GameVariables gameVariables = GameObject.Find("Variables").GetComponent<GameVariables>();
         // Guided by ChatGPT

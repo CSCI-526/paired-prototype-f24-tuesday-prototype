@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -47,6 +48,24 @@ public class PopupEventSystem : MonoBehaviour
                     Choice choice = popupEvent.choices[i];
                     button.transform.Find("Text").GetComponent<Text>().text = choice.description;
                     button.GetComponent<Button>().onClick.AddListener(() => choice.ApplyEffects());
+                    foreach (ChoiceEffect effect in choice.effects)
+                    {
+                        KeyValuePair<Info, FieldInfo>? variable = gameVariables.GetVariable(effect.gameVariableName);
+                        try
+                        {
+                            Info info = variable.Value.Key;
+                            if (info.GetType() == typeof(BudgetInfo))
+                            {
+                                FieldInfo field = variable.Value.Value;
+                                if (field.FieldType != typeof(float))
+                                    throw new System.Exception();
+                                float currentBudget = (float)field.GetValue(info);
+                                if (currentBudget + effect.value < 0)
+                                    button.GetComponent<Button>().interactable = false;
+                            }
+                        }
+                        catch { Debug.Log($"PopupEventSystem: Invalid Variable {effect.gameVariableName}"); }
+                    }
                 }
             }
             else

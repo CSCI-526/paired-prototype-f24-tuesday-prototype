@@ -48,21 +48,21 @@ public class PopupEventList
             "A sudden outbreak of COVID has hit the city, overwhelming hospitals and requiring immediate resource allocation.",
             new List<Choice> {
                 new Choice(
-                    "Provide emergency medical funding!",
+                    "Provide emergency medical funding! (-1000 health budget)",
                     new List<ChoiceEffect> {
-                        new ChoiceEffectAdd_f("health_budget", -5000), // 为紧急医疗分配资金
-                        new ChoiceEffectAdd_i("happiness", -10), // 幸福指数因恐慌和隔离措施下降
-                        new ChoiceEffectAdd_i("healthRate", 25), // 医疗系统增强，健康率提高
-                        new ChoiceEffectAdd_i("population", -1000) // 部分人口因疫情失去
+                        new ChoiceEffectAdd_f("healthBudget", -1000),
+                        new ChoiceEffectAdd_i("happiness", -10),
+                        new ChoiceEffectAdd_i("healthRate", 25),
+                        new ChoiceEffectAdd_i("population", -1000)
                     }
                 ),
                 new Choice(
                     "Impose strict lockdown and wait for the outbreak to subside.",
                     new List<ChoiceEffect> {
-                        new ChoiceEffectAdd_i("happiness", -30), // 严格封锁导致幸福感大幅下降
-                        new ChoiceEffectAdd_i("crimeRate", 5), // 封锁引发恐慌和社会不稳定，犯罪率增加
-                        new ChoiceEffectAdd_i("healthRate", 10), // 封锁有效缓解疫情，健康率略微提升
-                        new ChoiceEffectAdd_i("population", -500) // 依然有部分人口因疫情失去
+                        new ChoiceEffectAdd_i("happiness", -30),
+                        new ChoiceEffectAdd_i("crimeRate", 5),
+                        new ChoiceEffectAdd_i("healthRate", 10),
+                        new ChoiceEffectAdd_i("population", -500)
                     }
                 )
             }

@@ -15,19 +15,23 @@ public class Decision
     public string date; // Store the date as a string (YYYY-MM-DD)
 }
 
-public class DecisionManager : MonoBehaviour
+public class DecisionSystem : MonoBehaviour
 {
     public GameObject decisionPanel;
     public List<Decision> decisions; // List of all decisions based on date
+
     private GameVariables gameVariables; // Reference to your GameVariables class
-    public Button decision1Button; // Button for option A
-    public Button decision2Button; // Button for option B
     private DaySystem daySystem;
+    private Button decision1Button; // Button for option A
+    private Button decision2Button; // Button for option B
 
     void Start()
     {
         gameVariables = GameObject.Find("Variables").GetComponent<GameVariables>();
         daySystem = GameObject.Find("IndependentSystems").GetComponent<DaySystem>();
+
+        decision1Button = decisionPanel.transform.Find("Button - Decision1").GetComponent<Button>();
+        decision2Button = decisionPanel.transform.Find("Button - Decision2").GetComponent<Button>();
         HideDecisionButtons(); // Initially hide the buttons
     }
 
@@ -42,7 +46,7 @@ public class DecisionManager : MonoBehaviour
             {
                 daySystem.TogglePause();
                 // panelControlSystem.OpenPanel(decisionPanel);
-                decisionPanel.SetActive(true);
+                GameObject.Find("Canvas").GetComponent<PanelControlSystem>().OpenPanel(decisionPanel);
                 ShowDecisionOptions(decision);
                 return;
             }
@@ -83,9 +87,9 @@ public class DecisionManager : MonoBehaviour
         float newMoney = remainingMoney * 0.8f;
 
         // Update the budget variables in GameVariables
-        gameVariables.budgetInfo.health_budget = trueHealthBudget;
-        gameVariables.budgetInfo.crime_budget = trueCrimeBudget;
-        gameVariables.budgetInfo.construction_budget = constructionBudget;
+        gameVariables.budgetInfo.healthBudget = trueHealthBudget;
+        gameVariables.budgetInfo.crimeBudget = trueCrimeBudget;
+        gameVariables.budgetInfo.constructionBudget = constructionBudget;
 
         // Update the money variable in ResourcesInfo
         gameVariables.resourcesInfo.money = newMoney;
@@ -95,7 +99,8 @@ public class DecisionManager : MonoBehaviour
         // Hide buttons after a decision has been made & unpause
         HideDecisionButtons();
         daySystem.TogglePause();
-        decisionPanel.SetActive(false);
+        GetComponent<ConstructionSystem>().CheckBudget();
+        GameObject.Find("Canvas").GetComponent<PanelControlSystem>().OnClickOthersDisappearClose();
     }
 
     private void HideDecisionButtons()

@@ -98,9 +98,9 @@ public class DecisionSystem : MonoBehaviour
 
         // Hide buttons after a decision has been made & unpause
         HideDecisionButtons();
-        daySystem.TogglePause();
+        //daySystem.TogglePause();
         GetComponent<ConstructionSystem>().CheckBudget();
-        GameObject.Find("Canvas").GetComponent<PanelControlSystem>().OnClickOthersDisappearClose();
+        GameObject.Find("Canvas").GetComponent<PanelControlSystem>().OpenPanel(GameObject.Find("Canvas").transform.Find("Panel - Budget").gameObject);
     }
 
     private void HideDecisionButtons()

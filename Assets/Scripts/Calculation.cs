@@ -63,7 +63,7 @@ public class Calculation : MonoBehaviour
     {
         UpdateRates();
         float populationFactor = Mathf.Log10(Mathf.Max(1, population));
-        int impact = (int)(((crimeRate-10) + (healthRate-10) + (fireRisk-10)) * populationFactor / 30);
+        int impact = (int)(((crimeRate-10) + (-healthRate-10) + (fireRisk-10)) * populationFactor / 30);
         int newHappiness = Mathf.Clamp(happiness - impact, 0, 100);
         gameVariables.resourcesInfo.happiness = newHappiness;
     }

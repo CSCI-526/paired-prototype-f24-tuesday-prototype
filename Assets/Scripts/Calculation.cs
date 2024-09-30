@@ -4,7 +4,7 @@ using UnityEngine;
 public class Calculation : MonoBehaviour
 {
     public GameVariables gameVariables;
-    public float taxRatePerPerson = 1.0f;
+    public float taxRatePerPerson = 0.1f;
     public float repeatRate = 1f;
 
     private int crimeRate;
@@ -63,7 +63,7 @@ public class Calculation : MonoBehaviour
     {
         UpdateRates();
         float populationFactor = Mathf.Log10(Mathf.Max(1, population));
-        int impact = (int)(((crimeRate-10) + (healthRate-10) + (fireRisk-10)) * populationFactor / 10);
+        int impact = (int)(((crimeRate-10) + (healthRate-10) + (fireRisk-10)) * populationFactor / 30);
         int newHappiness = Mathf.Clamp(happiness - impact, 0, 100);
         gameVariables.resourcesInfo.happiness = newHappiness;
     }

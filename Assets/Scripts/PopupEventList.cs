@@ -50,7 +50,7 @@ public class PopupEventList
                 new Choice(
                     "Provide emergency medical funding!",
                     new List<ChoiceEffect> {
-                        new ChoiceEffectAdd_f("money", -50000), // 为紧急医疗分配资金
+                        new ChoiceEffectAdd_f("health_budget", -5000), // 为紧急医疗分配资金
                         new ChoiceEffectAdd_i("happiness", -10), // 幸福指数因恐慌和隔离措施下降
                         new ChoiceEffectAdd_i("healthRate", 25), // 医疗系统增强，健康率提高
                         new ChoiceEffectAdd_i("population", -1000) // 部分人口因疫情失去

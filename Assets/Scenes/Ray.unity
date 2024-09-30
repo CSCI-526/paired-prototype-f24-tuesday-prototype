@@ -1776,6 +1776,7 @@ GameObject:
   - component: {fileID: 362844286}
   - component: {fileID: 362844289}
   - component: {fileID: 362844290}
+  - component: {fileID: 362844291}
   m_Layer: 0
   m_Name: IndependentSystems
   m_TagString: Untagged
@@ -1900,6 +1901,19 @@ MonoBehaviour:
     date: 2024-01-02
   decision1Button: {fileID: 1014317174}
   decision2Button: {fileID: 1473043527}
+--- !u!114 &362844291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362844283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 311f65b8fbd528d4684e6a1fa2c7aa2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  constructionPanel: {fileID: 265982429}
 --- !u!1 &371749110
 GameObject:
   m_ObjectHideFlags: 0
@@ -2069,7 +2083,7 @@ GameObject:
   - component: {fileID: 523320070}
   - component: {fileID: 523320069}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Button - Hospital
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2618,7 +2632,7 @@ GameObject:
   - component: {fileID: 564476036}
   - component: {fileID: 564476035}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Button - Police Station
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5800,7 +5814,7 @@ GameObject:
   - component: {fileID: 1619338112}
   - component: {fileID: 1619338111}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Button - Fire Department
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

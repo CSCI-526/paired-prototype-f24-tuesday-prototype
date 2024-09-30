@@ -30,9 +30,10 @@ public class StatisticsInfo : Info
 
 public class BudgetInfo : Info
 {
-    public float totalBudget = 1000f;
+    public float totalBudget = 100000f;
     public float health_budget = 0f;
     public float crime_budget = 0f;
+    public float constructionBudget = 20f;
     public float reserved_budget;
 
     public BudgetInfo()

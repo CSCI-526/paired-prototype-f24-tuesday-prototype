@@ -660,7 +660,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 36
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1979,13 +1979,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decisionPanel: {fileID: 371749110}
   decisions:
-  - optionA: Health Initiative
-    optionB: Crime Reduction
+  - optionA: '"Every Second Counts: A Life Lost" campaign.  Last week, we lost Sarah,
+      a mother of two, because help arrived too late. Invest in our healthcare and
+      ensure timely assistance!'
+    optionB: '"Building Trust, Ensuring Safety" campaign. A neighborhood lost its
+      sense of security after a series of unsolved crimes. By investing in our police
+      budget, we can strengthen community relations and provide officers with the
+      resources they need to protect us all.'
     healthBudgetEffectA: 80
     crimeBudgetEffectA: 20
     healthBudgetEffectB: 20
     crimeBudgetEffectB: 80
     date: 2024-01-02
+  - optionA: '"Your Health is Our Priority" campaign. A preventable illness claimed
+      the life of Mark, a young father, due to limited access to healthcare facilities.
+      By investing in our health budget, we can ensure that everyone has access to
+      vital medical services when they need them most.'
+    optionB: '"Every Child Deserves to Feel Safe" campaign. Last month, a neighborhood
+      playground was the site of a robbery, leaving children frightened and parents
+      worried. By investing in our police budget, we can enhance community policing
+      and ensure our streets are safe for everyone, especially our youth.'
+    healthBudgetEffectA: 60
+    crimeBudgetEffectA: 40
+    healthBudgetEffectB: 40
+    crimeBudgetEffectB: 60
+    date: 2024-02-02
+  - optionA: "\"Break the Silence, Heal Together\" campaign. Recently, we lost a
+      beloved local teacher who struggled with mental health issues. It\u2019s time
+      to invest in mental health services and create a support system that encourages
+      open conversations and healing for all community members."
+    optionB: '"Strong Communities, Healthy Lives" campaign.  Last month, a neighborhood
+      was shaken by a tragic event that left a deep impact on families. By investing
+      in both crime prevention and healthcare services, we can create a safer environment
+      that promotes not just physical security, but also mental and emotional well-being
+      for everyone.'
+    healthBudgetEffectA: 75
+    crimeBudgetEffectA: 25
+    healthBudgetEffectB: 50
+    crimeBudgetEffectB: 50
+    date: 2024-03-02
 --- !u!114 &362844291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6946,7 +6978,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 36
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0

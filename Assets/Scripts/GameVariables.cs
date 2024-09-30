@@ -16,9 +16,9 @@ public class SystemInfo : Info
 
 public class ResourcesInfo : Info
 {
-    public float money = 100000; // Amount of money available
-    public int population = 100000; // Current city population
-    public int happiness = 100; // Overall city happiness index
+    public float money = 10000; // Amount of unallocated money available
+    public int population = 10000; // Current city population
+    public int happiness = 50; // Overall city happiness index
 }
 
 public class StatisticsInfo : Info
@@ -30,15 +30,9 @@ public class StatisticsInfo : Info
 
 public class BudgetInfo : Info
 {
-    public float totalBudget = 1000f;
     public float health_budget = 0f;
     public float crime_budget = 0f;
-    public float reserved_budget;
-
-    public BudgetInfo()
-    {
-        reserved_budget = totalBudget;
-    }
+    public float construction_budget = 0f;
 }
 
 public class GameVariables : MonoBehaviour

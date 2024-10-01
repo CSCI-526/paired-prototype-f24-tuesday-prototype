@@ -95,6 +95,104 @@ public class PopupEventList
                 )
             }
         ));
+        events.Add(new PopupEvent(
+            "recession",
+            "Economic Recession Hits!",
+            "A sudden economic downturn has led to increased unemployment and business closures across the city. The government must act quickly to stabilize the economy and support affected citizens.",
+            new List<Choice> {
+                new Choice(
+                    "Implement a job creation program using the construction budget",
+                    new List<ChoiceEffect> {
+                        new ChoiceEffectAdd_i("constructionBudget", -2000, 0, INFINITE),
+                        new ChoiceEffectAdd_i("happiness", 15),
+                        new ChoiceEffectAdd_i("healthRate", -5),
+                        new ChoiceEffectAdd_i("crimeRate", -10),
+                    }
+                ),
+                new Choice(
+                    "Increase welfare support for the unemployed using the health budget",
+                    new List<ChoiceEffect> {
+                        new ChoiceEffectAdd_i("healthBudget", -1500, 0, INFINITE),
+                        new ChoiceEffectAdd_i("happiness", 10),
+                        new ChoiceEffectAdd_i("healthRate", -10),
+                        new ChoiceEffectAdd_i("crimeRate", 5),
+                    }
+                ),
+                new Choice(
+                    "Cut city spending and wait for recovery",
+                    new List<ChoiceEffect> {
+                        new ChoiceEffectAdd_i("happiness", -10),
+                        new ChoiceEffectAdd_i("healthRate", 5),
+                        new ChoiceEffectAdd_i("crimeRate", 10),
+                        new ChoiceEffectAdd_i("fireRisk", 5),
+                    }
+                )
+            }
+        ));
+        events.Add(new PopupEvent(
+            "flooding",
+            "Severe Flooding Occurs!",
+            "Heavy rains have caused widespread flooding across the city, damaging homes and infrastructure. Immediate action is required to assist affected citizens and prevent further damage.",
+            new List<Choice> {
+                new Choice(
+                    "Allocate funds for emergency relief and rescue operations using the health budget",
+                    new List<ChoiceEffect> {
+                        new ChoiceEffectAdd_i("healthBudget", -2500, 0, INFINITE),
+                        new ChoiceEffectAdd_i("happiness", -5),
+                        new ChoiceEffectAdd_i("healthRate", -15),
+                        new ChoiceEffectAdd_i("fireRisk", 5),
+                        new ChoiceEffectAdd_i("crimeRate", 5),
+                    }
+                ),
+                new Choice(
+                    "Invest in improving drainage systems using the construction budget",
+                    new List<ChoiceEffect> {
+                        new ChoiceEffectAdd_i("constructionBudget", -3000, 0, INFINITE),
+                        new ChoiceEffectAdd_i("happiness", 10),
+                        new ChoiceEffectAdd_i("healthRate", 5),
+                        new ChoiceEffectAdd_i("fireRisk", -10),
+                        new ChoiceEffectAdd_i("crimeRate", -5),
+                    }
+                ),
+                new Choice(
+                    "Declare a state of emergency and provide temporary shelter",
+                    new List<ChoiceEffect> {
+                        new ChoiceEffectAdd_i("healthBudget", -1500, 0, INFINITE),
+                        new ChoiceEffectAdd_i("happiness", 5),
+                        new ChoiceEffectAdd_i("healthRate", -10),
+                        new ChoiceEffectAdd_i("crimeRate", 0),
+                        new ChoiceEffectAdd_i("fireRisk", 0),
+                    }
+                )
+            }
+        ));
+        events.Add(new PopupEvent(
+            "hostage",
+            "Hostage Situation at the City Bank!",
+            "A group of armed robbers has taken hostages at the city bank. The situation is tense, and immediate action is required to ensure the safety of the hostages and provide support for any victims injured during the robbery.",
+            new List<Choice> {
+                new Choice(
+                    "Allocate additional funds for SWAT and negotiation teams using the crime budget",
+                    new List<ChoiceEffect> {
+                        new ChoiceEffectAdd_i("crimeBudget", -3000, 0, INFINITE),
+                        new ChoiceEffectAdd_i("happiness", -5),
+                        new ChoiceEffectAdd_i("crimeRate", -30),
+                        new ChoiceEffectAdd_i("healthRate", 0),
+                        new ChoiceEffectAdd_i("fireRisk", 0)
+                    }
+                ),
+                new Choice(
+                    "Provide immediate medical assistance to victims injured during the robbery using the health budget",
+                    new List<ChoiceEffect> {
+                        new ChoiceEffectAdd_i("healthBudget", -2000, 0, INFINITE),
+                        new ChoiceEffectAdd_i("happiness", 10),
+                        new ChoiceEffectAdd_i("healthRate", 15),
+                        new ChoiceEffectAdd_i("crimeRate", -5),
+                        new ChoiceEffectAdd_i("fireRisk", 0)
+                    }
+                )
+            }
+        ));
     }
 
     public PopupEvent GetEventById(string id)

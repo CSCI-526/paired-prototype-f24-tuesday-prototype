@@ -40,8 +40,6 @@ public class ChoiceEffectAdd_f : ChoiceEffect
 
             float currentValue = (float)field.GetValue(info);
             float newValue = currentValue + (float)value;
-
-            // Clamp using minValue and maxValue
             newValue = Mathf.Clamp(newValue, minValue, maxValue);
 
             field.SetValue(info, newValue);
@@ -69,8 +67,6 @@ public class ChoiceEffectAdd_i : ChoiceEffect
 
             int currentValue = (int)field.GetValue(info);
             int newValue = currentValue + (int)value;
-
-            // Clamp using minValue and maxValue
             newValue = (int)Mathf.Clamp(newValue, minValue, maxValue);
 
             field.SetValue(info, newValue);

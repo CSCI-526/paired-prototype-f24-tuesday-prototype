@@ -59,10 +59,10 @@ public class PopupEventSystem : MonoBehaviour
                             if (info.GetType() == typeof(BudgetInfo))
                             {
                                 FieldInfo field = variable.Value.Value;
-                                if (field.FieldType != typeof(float))
+                                if (field.FieldType != typeof(int))
                                     throw new System.Exception();
-                                float currentBudget = (float)field.GetValue(info);
-                                if (currentBudget + (float)effect.value < 0)
+                                int currentBudget = (int)field.GetValue(info);
+                                if (currentBudget + (int)effect.value < 0)
                                     button.GetComponent<Button>().interactable = false;
                             }
                         }

@@ -6,12 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5d1496cd-6d21-47ac-86fe-664f18a27713" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.paired-prototype-f24-tuesday-prototype/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.paired-prototype-f24-tuesday-prototype/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Ray.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Ray.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DisplayVariable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DisplayVariable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameVariables.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameVariables.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PopupEventChoiceEffectList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PopupEventChoiceEffectList.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PopupEventList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PopupEventList.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PopupEventSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PopupEventSystem.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +19,9 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/EventSystem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/InputField/CharacterLimitValidation.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/UnityEngine.UI.Tests.asmdef" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7a677fa6764145248551d021a97e8f72176200/f0/64c1c7fd/Component.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2

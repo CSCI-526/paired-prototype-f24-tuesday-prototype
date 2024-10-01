@@ -8,23 +8,28 @@ public class ChoiceEffect
 {
     public string gameVariableName;
     public object value;
+    public float minValue; // Minimum value for clamping
+    public float maxValue; // Maximum value for clamping
+
+    public ChoiceEffect(string gameVariableName, object value, float minValue, float maxValue)
+    {
+        this.gameVariableName = gameVariableName;
+        this.value = value;
+        this.minValue = minValue;
+        this.maxValue = maxValue;
+    }
 
     public virtual void ApplyEffect() { }
 }
 
 public class ChoiceEffectAdd_f : ChoiceEffect
 {
-    
-    public ChoiceEffectAdd_f(string gameVariableName, float value)
-    {
-        this.gameVariableName = gameVariableName;
-        this.value = value;
-    }
+    public ChoiceEffectAdd_f(string gameVariableName, float value, float minValue = 0f, float maxValue = 100f)
+        : base(gameVariableName, value, minValue, maxValue) { }
 
     public override void ApplyEffect()
     {
         GameVariables gameVariables = GameObject.Find("Variables").GetComponent<GameVariables>();
-        // Guided by ChatGPT
         KeyValuePair<Info, FieldInfo>? variable = gameVariables.GetVariable(gameVariableName);
         try
         {
@@ -32,8 +37,14 @@ public class ChoiceEffectAdd_f : ChoiceEffect
             FieldInfo field = variable.Value.Value;
             if (field.FieldType != typeof(float))
                 throw new System.Exception();
+
             float currentValue = (float)field.GetValue(info);
-            field.SetValue(info, currentValue + (float)value);
+            float newValue = currentValue + (float)value;
+
+            // Clamp using minValue and maxValue
+            newValue = Mathf.Clamp(newValue, minValue, maxValue);
+
+            field.SetValue(info, newValue);
             Debug.Log($"ChoiceEffectAdd_f({gameVariableName}, {value})");
         }
         catch { Debug.LogError($"ChoiceEffectAdd_f: Invalid Variable {gameVariableName}"); }
@@ -42,16 +53,12 @@ public class ChoiceEffectAdd_f : ChoiceEffect
 
 public class ChoiceEffectAdd_i : ChoiceEffect
 {
-    public ChoiceEffectAdd_i(string gameVariableName, int value)
-    {
-        this.gameVariableName = gameVariableName;
-        this.value = value;
-    }
+    public ChoiceEffectAdd_i(string gameVariableName, int value, float minValue = 0, float maxValue = 100)
+        : base(gameVariableName, value, minValue, maxValue) { }
 
     public override void ApplyEffect()
     {
         GameVariables gameVariables = GameObject.Find("Variables").GetComponent<GameVariables>();
-        // Guided by ChatGPT
         KeyValuePair<Info, FieldInfo>? variable = gameVariables.GetVariable(gameVariableName);
         try
         {
@@ -59,9 +66,14 @@ public class ChoiceEffectAdd_i : ChoiceEffect
             FieldInfo field = variable.Value.Value;
             if (field.FieldType != typeof(int))
                 throw new System.Exception();
+
             int currentValue = (int)field.GetValue(info);
             int newValue = currentValue + (int)value;
-            field.SetValue(info, Mathf.Clamp(newValue, 0, 100));
+
+            // Clamp using minValue and maxValue
+            newValue = (int)Mathf.Clamp(newValue, minValue, maxValue);
+
+            field.SetValue(info, newValue);
             Debug.Log($"ChoiceEffectAdd_i({gameVariableName}, {value})");
         }
         catch { Debug.LogError($"ChoiceEffectAdd_i: Invalid Variable {gameVariableName}"); }
@@ -82,5 +94,14 @@ public class Choice
     {
         foreach (ChoiceEffect effect in effects)
             effect.ApplyEffect();
+        ConstructionSystem constructionSystem = GameObject.Find("YourConstructionSystemObjectName").GetComponent<ConstructionSystem>();
+        if (constructionSystem != null)
+        {
+            constructionSystem.CheckBudget();
+        }
+        else
+        {
+            Debug.LogError("ConstructionSystem component not found on the specified GameObject.");
+        }
     }
 }

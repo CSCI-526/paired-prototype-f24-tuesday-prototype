@@ -25,6 +25,7 @@ public class PopupEventList
 {
     private static PopupEventList instance;
     public List<PopupEvent> events;
+    private int INFINITE = 10000000;
 
     private PopupEventList()
     {
@@ -49,11 +50,11 @@ public class PopupEventList
                 new Choice(
                     "Allocate emergency funds from health budget to hospitals to bolster their resources and support healthcare workers.",
                     new List<ChoiceEffect> {
-                        new ChoiceEffectAdd_i("healthBudget", -2000),
+                        new ChoiceEffectAdd_i("healthBudget", -2000, 0, INFINITE),
                         new ChoiceEffectAdd_i("happiness", 5),
                         new ChoiceEffectAdd_i("healthRate", -20),
                         new ChoiceEffectAdd_i("crimeRate", 5),
-                        new ChoiceEffectAdd_i("population", -500),
+                        new ChoiceEffectAdd_i("population", -500, 0, INFINITE),
                     }
                 ),
                 new Choice(
@@ -62,8 +63,8 @@ public class PopupEventList
                         new ChoiceEffectAdd_i("happiness", -20),
                         new ChoiceEffectAdd_i("crimeRate", -10),
                         new ChoiceEffectAdd_i("healthRate", -10),
-                        new ChoiceEffectAdd_i("population", -2000),
-                        new ChoiceEffectAdd_i("crimeBudget", -2000)
+                        new ChoiceEffectAdd_i("population", -2000, 0, INFINITE),
+                        new ChoiceEffectAdd_i("crimeBudget", -2000, 0, INFINITE)
                     }
                 )
             }
@@ -76,7 +77,7 @@ public class PopupEventList
                 new Choice(
                     "Set up emergency cooling centers and free water using the health budget",
                     new List<ChoiceEffect> {
-                        new ChoiceEffectAdd_i("healthBudget", -1000),
+                        new ChoiceEffectAdd_i("healthBudget", -1000, 0, INFINITE),
                         new ChoiceEffectAdd_i("happiness", 10),
                         new ChoiceEffectAdd_i("healthRate", -5),
                         new ChoiceEffectAdd_i("crimeRate", 5),
@@ -86,7 +87,7 @@ public class PopupEventList
                 new Choice(
                     "Upgrade the city’s infrastructure for future heatwaves using the construction budget",
                     new List<ChoiceEffect> {
-                        new ChoiceEffectAdd_i("constructionBudget", -1000),
+                        new ChoiceEffectAdd_i("constructionBudget", -1000, 0, INFINITE),
                         new ChoiceEffectAdd_i("happiness", -5),
                         new ChoiceEffectAdd_i("healthRate", -10),
                         new ChoiceEffectAdd_i("fireRisk", -20),

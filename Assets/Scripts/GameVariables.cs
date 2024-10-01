@@ -9,7 +9,7 @@ public interface Info { }
 public class SystemInfo : Info
 {
     public string currentDateTimeString = "2024-01-01";
-    public int pause = 1; // 0 means continue, 1 means pause
+    public bool pause = true;
     public string pauseShow = "Paused";
 
 }

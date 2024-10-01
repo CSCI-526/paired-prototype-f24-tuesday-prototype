@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class DaySystem : MonoBehaviour
@@ -10,7 +11,7 @@ public class DaySystem : MonoBehaviour
     public Text timeText;
     public int currentMonth;
     public bool todayIsNewMonth = false;
-    public float repeatRate = 6f;
+    public float repeatRate = 1f, maxSpeed = 8f, minSpeed = 0.5f;
 
     private GameVariables gameVariables;
     private Slider timeSlider;
@@ -22,7 +23,7 @@ public class DaySystem : MonoBehaviour
     public void Init()
     {
         timeSlider = TimeModule.transform.Find("Slider").GetComponent<Slider>();
-        timeSlider.maxValue = repeatRate;
+        timeSlider.maxValue = 1;
         //sliderFillImage = TimeModule.transform.Find("Slider").GetComponentInChildren<Image>();
 
         gameVariables = GameObject.Find("Variables").GetComponent<GameVariables>();
@@ -46,22 +47,20 @@ public class DaySystem : MonoBehaviour
         while (true)
         {
             //Debug.Log(currentDateTime.ToString("yyyy-MM-dd"));
-            yield return new WaitUntil(() => gameVariables.systemInfo.pause == 0);
-            while (elapsedTime < repeatRate)
+            yield return new WaitUntil(() => !gameVariables.systemInfo.pause);
+            while (elapsedTime < 1)
             {
                 yield return new WaitForSeconds(step);
-                if (gameVariables.systemInfo.pause == 0)
+                if (!gameVariables.systemInfo.pause)
                 {
-                    elapsedTime += step;
-                    if (timeSlider != null)
-                        timeSlider.value = elapsedTime;
-                        UpdateTimeText(elapsedTime);
-                    // UpdateSliderColor(elapsedTime / repeatRate);
+                    elapsedTime += step / repeatRate;
+                    timeSlider.value = elapsedTime;
+                    UpdateTimeText(elapsedTime);
                     GetComponent<MapSystem>().UpdateOnTick();
                 }
             }
 
-            if (elapsedTime >= repeatRate)
+            if (elapsedTime >= 1)
             {
                 currentDateTime = currentDateTime.AddDays(1);
                 calculation.CalculateHappiness();
@@ -76,7 +75,7 @@ public class DaySystem : MonoBehaviour
                 }
                 if (currentDateTime.ToString("yyyy-MM-dd") == "2024-04-01")
                 {
-                    gameVariables.systemInfo.pause = 1;
+                    gameVariables.systemInfo.pause = true;
                     calculation.FinalGradeCalculation();
                     FinalPage.SetActive(true);
                 }
@@ -98,24 +97,37 @@ public class DaySystem : MonoBehaviour
         return nextDay.Month != currentDateTime.Month;
     }
 
-
-    //private void UpdateSliderColor(float normalizedTime)
-    //{
-    //    Color dayColor = Color.cyan;
-    //    Color nightColor = Color.blue;
-    //    sliderFillImage.color = Color.Lerp(nightColor, dayColor, Mathf.PingPong(normalizedTime * 2, 1));
-    //}
-
     private void UpdateTimeText(float elapsedTime)
     {
-        int hours = (int)(24 * elapsedTime / repeatRate);
-        int minutes = (int)(1440 * elapsedTime / repeatRate) % 60;
+        int hours = (int)(24 * elapsedTime);
+        int minutes = (int)(1440 * elapsedTime) % 60;
         timeText.text = string.Format("{0:00}:{1:00}", hours, minutes);
     }
 
     public void TogglePause()
     {
-        gameVariables.systemInfo.pause = gameVariables.systemInfo.pause == 0 ? 1 : 0;
-        gameVariables.systemInfo.pauseShow = gameVariables.systemInfo.pause == 1 ? "Paused" : "Unpaused";
+        gameVariables.systemInfo.pause = !gameVariables.systemInfo.pause;
+        gameVariables.systemInfo.pauseShow = gameVariables.systemInfo.pause ? "Paused" : "Unpaused";
+    }
+
+    public void SpeedUp()
+    {
+        repeatRate = Mathf.Clamp(repeatRate / 2, minSpeed, maxSpeed);
+    }
+
+    public void SpeedDown()
+    {
+        repeatRate = Mathf.Clamp(repeatRate * 2, minSpeed, maxSpeed);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (EventSystem.current.currentSelectedGameObject != null)
+                EventSystem.current.SetSelectedGameObject(null);
+            else
+                TogglePause();
+        }
     }
 }

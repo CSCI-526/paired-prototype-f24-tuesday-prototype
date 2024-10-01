@@ -36,11 +36,11 @@ public class Calculation : MonoBehaviour
         while (true)
         {
             //Debug.Log(currentDateTime.ToString("yyyy-MM-dd"));
-            yield return new WaitUntil(() => gameVariables.systemInfo.pause == 0);
+            yield return new WaitUntil(() => !gameVariables.systemInfo.pause);
             while (elapsedTime < repeatRate)
             {
                 yield return new WaitForSeconds(1);
-                if (gameVariables.systemInfo.pause == 0)
+                if (!gameVariables.systemInfo.pause)
                 {
                     elapsedTime += 1;
                 }

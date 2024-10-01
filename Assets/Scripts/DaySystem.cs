@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DaySystem : MonoBehaviour
 {
     public GameObject TimeModule;
+    public GameObject FinalPage;
     public Text timeText;
     public int currentMonth;
     public bool todayIsNewMonth = false;
@@ -72,6 +73,12 @@ public class DaySystem : MonoBehaviour
                 if (todayIsNewMonth)
                 {
                     calculation.ApplyTaxes();
+                }
+                if (currentDateTime.ToString("yyyy-MM-dd") == "2024-04-01")
+                {
+                    gameVariables.systemInfo.pause = 1;
+                    calculation.FinalGradeCalculation();
+                    FinalPage.SetActive(true);
                 }
                 gameVariables.systemInfo.currentDateTimeString = currentDateTime.ToString("yyyy-MM-dd");
                 

@@ -78,18 +78,18 @@ public class DecisionSystem : MonoBehaviour
     private void ApplyDecisionEffects(float healthEffect, float crimeEffect)
     {
         float happiness = gameVariables.resourcesInfo.happiness / 100f;
-        float availableMoney = gameVariables.resourcesInfo.money;
+        int availableMoney = gameVariables.resourcesInfo.money;
         
-        float trueHealthBudget = healthEffect * happiness * availableMoney;
-        float trueCrimeBudget = crimeEffect * happiness * availableMoney;
-        float remainingMoney = availableMoney - (trueHealthBudget + trueCrimeBudget);
-        float constructionBudget = remainingMoney * 0.2f;
-        float newMoney = remainingMoney * 0.8f;
+        int trueHealthBudget = (int)(healthEffect * happiness * availableMoney);
+        int trueCrimeBudget = (int)(crimeEffect * happiness * availableMoney);
+        int remainingMoney = availableMoney - (trueHealthBudget + trueCrimeBudget);
+        int constructionBudget = (int)(remainingMoney * 0.2f);
+        int newMoney = (int)(remainingMoney * 0.8f);
 
         // Update the budget variables in GameVariables
-        gameVariables.budgetInfo.healthBudget = trueHealthBudget;
-        gameVariables.budgetInfo.crimeBudget = trueCrimeBudget;
-        gameVariables.budgetInfo.constructionBudget = constructionBudget;
+        gameVariables.budgetInfo.healthBudget += trueHealthBudget;
+        gameVariables.budgetInfo.crimeBudget += trueCrimeBudget;
+        gameVariables.budgetInfo.constructionBudget += constructionBudget;
 
         // Update the money variable in ResourcesInfo
         gameVariables.resourcesInfo.money = newMoney;

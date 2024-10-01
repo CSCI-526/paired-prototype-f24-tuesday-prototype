@@ -60,7 +60,8 @@ public class ChoiceEffectAdd_i : ChoiceEffect
             if (field.FieldType != typeof(int))
                 throw new System.Exception();
             int currentValue = (int)field.GetValue(info);
-            field.SetValue(info, currentValue + (int)value);
+            int newValue = currentValue + (int)value;
+            field.SetValue(info, Mathf.Clamp(newValue, 0, 100));
             Debug.Log($"ChoiceEffectAdd_i({gameVariableName}, {value})");
         }
         catch { Debug.LogError($"ChoiceEffectAdd_i: Invalid Variable {gameVariableName}"); }

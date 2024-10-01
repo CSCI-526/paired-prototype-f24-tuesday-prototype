@@ -25,7 +25,7 @@ public class ResourcesInfo : Info
 public class StatisticsInfo : Info
 {
     public int crimeRate = 0; // Current crime rate percentage
-    public int healthRate = 0; // Current health rate percentage
+    public int healthRate = 0; // This is actually opposite. High = bad, low = good. This is more diseaseRate than healthRate
     public int fireRisk = 50; // Current fire rate percentage
     public int constructionCost = 500;
 }

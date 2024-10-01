@@ -90,6 +90,13 @@ public class PopupEventSystem : MonoBehaviour
             GameObject newButton = Instantiate(buttonPrefab, popupEventPanel.transform);
             RectTransform rectTransform = newButton.GetComponent<RectTransform>();
             rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, 30 + 50 * i);
+            
+            // Enable Best Fit for the button's text
+            Text buttonText = newButton.transform.Find("Text").GetComponent<Text>();
+            buttonText.resizeTextForBestFit = true;
+            buttonText.resizeTextMinSize = 10;
+            buttonText.resizeTextMaxSize = 30;
+
             newButton.GetComponent<Button>().onClick.AddListener(() => popupEventPanel.SetActive(false));
             buttons.Add(newButton);
         }

@@ -43,46 +43,53 @@ public class PopupEventList
     {
         events.Add(new PopupEvent(
             "covid",
-
-            "COVID Outbreak!",
-            "A sudden outbreak of COVID has hit the city, overwhelming hospitals and requiring immediate resource allocation.",
+            "COVID Outbreak Hits the City!",
+            "A sudden outbreak of COVID has overwhelmed hospitals and healthcare resources. The citizens are in fear, and drastic actions are needed to manage the situation effectively.",
             new List<Choice> {
                 new Choice(
-                    "Provide emergency medical funding! (-1000 health budget)",
+                    "Allocate emergency funds from health budget to hospitals to bolster their resources and support healthcare workers.",
                     new List<ChoiceEffect> {
-                        new ChoiceEffectAdd_i("healthBudget", -1000),
-                        new ChoiceEffectAdd_i("happiness", -10),
-                        new ChoiceEffectAdd_i("healthRate", 25),
-                        new ChoiceEffectAdd_i("population", -1000)
+                        new ChoiceEffectAdd_i("healthBudget", -2000),
+                        new ChoiceEffectAdd_i("happiness", 5),
+                        new ChoiceEffectAdd_i("healthRate", -20),
+                        new ChoiceEffectAdd_i("crimeRate", 5),
+                        new ChoiceEffectAdd_i("population", -500),
                     }
                 ),
                 new Choice(
-                    "Impose strict lockdown and wait for the outbreak to subside.",
+                    "Implement a strict city-wide lockdown, limiting movement and social gatherings using the crime budget.",
                     new List<ChoiceEffect> {
-                        new ChoiceEffectAdd_i("happiness", -30),
-                        new ChoiceEffectAdd_i("crimeRate", 5),
-                        new ChoiceEffectAdd_i("healthRate", 10),
-                        new ChoiceEffectAdd_i("population", -500)
+                        new ChoiceEffectAdd_i("happiness", -20),
+                        new ChoiceEffectAdd_i("crimeRate", -10),
+                        new ChoiceEffectAdd_i("healthRate", -10),
+                        new ChoiceEffectAdd_i("population", -2000),
+                        new ChoiceEffectAdd_i("crimeBudget", -2000)
                     }
                 )
             }
         ));
         events.Add(new PopupEvent(
-            "harris",
-
-            "Harris was shot by a bullet",
-            "On *****, Donald Trump was shot...",
+            "heatwave",
+            "Severe Heatwave Strikes!",
+            "A record-breaking heatwave has hit the city, causing power outages, increasing the risk of fires, and putting vulnerable citizens at risk. The city needs immediate relief or long-term solutions to prevent future crises.",
             new List<Choice> {
                 new Choice(
-                    "Raise your hand!",
+                    "Set up emergency cooling centers and free water using the health budget",
                     new List<ChoiceEffect> {
-                        new ChoiceEffectAdd_i("crimeRate", 1)
+                        new ChoiceEffectAdd_i("healthBudget", -1000),
+                        new ChoiceEffectAdd_i("happiness", 10),
+                        new ChoiceEffectAdd_i("healthRate", -5),
+                        new ChoiceEffectAdd_i("crimeRate", 5),
+                        new ChoiceEffectAdd_i("fireRisk", -10),
                     }
                 ),
                 new Choice(
-                    "Flee!",
+                    "Upgrade the city’s infrastructure for future heatwaves using the construction budget",
                     new List<ChoiceEffect> {
-                        new ChoiceEffectAdd_i("healthRate", 1)
+                        new ChoiceEffectAdd_i("constructionBudget", -1000),
+                        new ChoiceEffectAdd_i("happiness", -5),
+                        new ChoiceEffectAdd_i("healthRate", -10),
+                        new ChoiceEffectAdd_i("fireRisk", -20),
                     }
                 )
             }

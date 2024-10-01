@@ -90,7 +90,7 @@ public class Choice
     {
         foreach (ChoiceEffect effect in effects)
             effect.ApplyEffect();
-        ConstructionSystem constructionSystem = GameObject.Find("YourConstructionSystemObjectName").GetComponent<ConstructionSystem>();
+        ConstructionSystem constructionSystem = GameObject.Find("IndependentSystems").GetComponent<ConstructionSystem>();
         if (constructionSystem != null)
         {
             constructionSystem.CheckBudget();

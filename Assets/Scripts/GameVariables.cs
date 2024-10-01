@@ -16,16 +16,24 @@ public class SystemInfo : Info
 
 public class ResourcesInfo : Info
 {
-    public float money = 100000; // Amount of money available
-    public int population = 100000; // Current city population
-    public int happiness = 100; // Overall city happiness index
+    public float money = 10000; // Amount of unallocated money available
+    public int population = 10000; // Current city population
+    public int happiness = 50; // Overall city happiness index
 }
 
 public class StatisticsInfo : Info
 {
-    public int crimeRate = 2; // Current crime rate percentage
+    public int crimeRate = 0; // Current crime rate percentage
     public int healthRate = 0; // Current health rate percentage
-    public int fireRisk = 0; // Current fire rate percentage
+    public int fireRisk = 50; // Current fire rate percentage
+    public int constructionCost = 500;
+}
+
+public class BudgetInfo : Info
+{
+    public float healthBudget = 0f;
+    public float crimeBudget = 0f;
+    public float constructionBudget = 0f;
 }
 
 public class GameVariables : MonoBehaviour
@@ -33,14 +41,21 @@ public class GameVariables : MonoBehaviour
     public SystemInfo systemInfo;
     public ResourcesInfo resourcesInfo;
     public StatisticsInfo statisticsInfo;
+    public BudgetInfo budgetInfo;
+
+    private GameObject systems;
 
     private void Start()
     {
         systemInfo = new SystemInfo();
         resourcesInfo = new ResourcesInfo();
         statisticsInfo = new StatisticsInfo();
-        GameObject.Find("IndependentSystems").GetComponent<DaySystem>().Init();
-        GameObject.Find("IndependentSystems").GetComponent<Calculation>().Init();
+        budgetInfo = new BudgetInfo();
+
+        systems = GameObject.Find("IndependentSystems");
+        systems.GetComponent<DaySystem>().Init();
+        systems.GetComponent<MapSystem>().Init();
+        systems.GetComponent<ConstructionSystem>().Init();
     }
 
     // ? is guided by chatGPT
@@ -56,6 +71,9 @@ public class GameVariables : MonoBehaviour
         field = statisticsInfo.GetType().GetField(variableName, BindingFlags.Public | BindingFlags.Instance);
         if (field != null)
             return new KeyValuePair<Info, FieldInfo>(statisticsInfo, field);
+        field = budgetInfo.GetType().GetField(variableName, BindingFlags.Public | BindingFlags.Instance);
+        if (field != null)
+            return new KeyValuePair<Info, FieldInfo>(budgetInfo, field);
         return null;
     }
 }

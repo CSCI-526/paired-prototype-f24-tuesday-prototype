@@ -4,6 +4,7 @@ using UnityEngine;
 public class Calculation : MonoBehaviour
 {
     public GameVariables gameVariables;
+    public float taxRatePerPerson = 0.1f;
     public float repeatRate = 1f;
 
     private int crimeRate;
@@ -52,12 +53,25 @@ public class Calculation : MonoBehaviour
             if (elapsedTime >= repeatRate)
             {
                 UpdateRates();
-                float populationFactor = Mathf.Log10(Mathf.Max(1, population));
-                int impact = (int)((crimeRate + healthRate + fireRisk) * populationFactor);
-                int newHappiness = Mathf.Clamp(happiness - impact, 0, 100);
-                gameVariables.resourcesInfo.happiness = newHappiness;
+                CalculateHappiness();
                 elapsedTime = 0;
             }
         }
+    }
+
+    public void CalculateHappiness()
+    {
+        UpdateRates();
+        float populationFactor = Mathf.Log10(Mathf.Max(1, population));
+        int impact = (int)(((crimeRate-10) + (-healthRate-10) + (fireRisk-10)) * populationFactor / 30);
+        int newHappiness = Mathf.Clamp(happiness - impact, 0, 100);
+        gameVariables.resourcesInfo.happiness = newHappiness;
+    }
+
+    public void ApplyTaxes()
+    {
+        float taxCollected = population * taxRatePerPerson;
+        gameVariables.resourcesInfo.money += taxCollected;
+        Debug.Log($"Tax collected: {taxCollected}, Total money: {gameVariables.resourcesInfo.money}");
     }
 }

@@ -45,18 +45,24 @@ public class PopupEventList
             "covid",
 
             "COVID Outbreak!",
-            "On *****, our city...",
+            "A sudden outbreak of COVID has hit the city, overwhelming hospitals and requiring immediate resource allocation.",
             new List<Choice> {
                 new Choice(
-                    "Raise your hand!",
+                    "Provide emergency medical funding! (-1000 health budget)",
                     new List<ChoiceEffect> {
-                        new ChoiceEffectAdd_f("money", 10000)
+                        new ChoiceEffectAdd_f("healthBudget", -1000),
+                        new ChoiceEffectAdd_i("happiness", -10),
+                        new ChoiceEffectAdd_i("healthRate", 25),
+                        new ChoiceEffectAdd_i("population", -1000)
                     }
                 ),
                 new Choice(
-                    "Flee!",
+                    "Impose strict lockdown and wait for the outbreak to subside.",
                     new List<ChoiceEffect> {
-                        new ChoiceEffectAdd_i("population", -10000)
+                        new ChoiceEffectAdd_i("happiness", -30),
+                        new ChoiceEffectAdd_i("crimeRate", 5),
+                        new ChoiceEffectAdd_i("healthRate", 10),
+                        new ChoiceEffectAdd_i("population", -500)
                     }
                 )
             }

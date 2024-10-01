@@ -174,21 +174,27 @@ public class PopupEventList
                 new Choice(
                     "Allocate additional funds for SWAT and negotiation teams using the crime budget",
                     new List<ChoiceEffect> {
-                        new ChoiceEffectAdd_i("crimeBudget", -3000, 0, INFINITE),
+                        new ChoiceEffectAdd_i("crimeBudget", -1000, 0, INFINITE),
                         new ChoiceEffectAdd_i("happiness", -5),
                         new ChoiceEffectAdd_i("crimeRate", -30),
-                        new ChoiceEffectAdd_i("healthRate", 0),
-                        new ChoiceEffectAdd_i("fireRisk", 0)
+                        new ChoiceEffectAdd_i("healthRate", 0)
                     }
                 ),
                 new Choice(
                     "Provide immediate medical assistance to victims injured during the robbery using the health budget",
                     new List<ChoiceEffect> {
-                        new ChoiceEffectAdd_i("healthBudget", -2000, 0, INFINITE),
+                        new ChoiceEffectAdd_i("healthBudget", -500, 0, INFINITE),
                         new ChoiceEffectAdd_i("happiness", 10),
                         new ChoiceEffectAdd_i("healthRate", 15),
-                        new ChoiceEffectAdd_i("crimeRate", -5),
-                        new ChoiceEffectAdd_i("fireRisk", 0)
+                        new ChoiceEffectAdd_i("crimeRate", -5)
+                    }
+                ),
+                new Choice(
+                    "Just wait for the situation to subside",
+                    new List<ChoiceEffect> {
+                        new ChoiceEffectAdd_i("happiness", -15),
+                        new ChoiceEffectAdd_i("healthRate", 15),
+                        new ChoiceEffectAdd_i("crimeRate", 15)
                     }
                 )
             }

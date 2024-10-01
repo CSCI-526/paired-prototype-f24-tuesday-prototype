@@ -2216,6 +2216,12 @@ MonoBehaviour:
     popupEventId: covid
   - dateTime: 2024-01-22
     popupEventId: heatwave
+  - dateTime: 2024-02-08
+    popupEventId: recession
+  - dateTime: 2024-02-28
+    popupEventId: hostage
+  - dateTime: 2024-03-14
+    popupEventId: flooding
 --- !u!114 &362844287
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d1496cd-6d21-47ac-86fe-664f18a27713" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.paired-prototype-f24-tuesday-prototype/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.paired-prototype-f24-tuesday-prototype/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Calculation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Calculation.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PopupEventList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PopupEventList.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

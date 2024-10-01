@@ -4,7 +4,7 @@ using UnityEngine;
 public class Calculation : MonoBehaviour
 {
     public GameVariables gameVariables;
-    public float taxRatePerPerson = 1.0f;
+    public float taxRatePerPerson = 0.1f;
     public float repeatRate = 1f;
 
     private int crimeRate;
@@ -63,15 +63,44 @@ public class Calculation : MonoBehaviour
     {
         UpdateRates();
         float populationFactor = Mathf.Log10(Mathf.Max(1, population));
-        int impact = (int)(((crimeRate-10) + (healthRate-10) + (fireRisk-10)) * populationFactor / 10);
+        int impact = (int)(((crimeRate-10) + (-healthRate-10) + (fireRisk-10)) * populationFactor / 30);
         int newHappiness = Mathf.Clamp(happiness - impact, 0, 100);
         gameVariables.resourcesInfo.happiness = newHappiness;
     }
 
     public void ApplyTaxes()
     {
-        float taxCollected = population * taxRatePerPerson;
+        int taxCollected = (int)(population * taxRatePerPerson);
         gameVariables.resourcesInfo.money += taxCollected;
         Debug.Log($"Tax collected: {taxCollected}, Total money: {gameVariables.resourcesInfo.money}");
+    }
+
+    public void FinalGradeCalculation()
+    {
+        UpdateRates();
+        if(happiness == 100)
+        {
+            gameVariables.resourcesInfo.finalGrade = "A";
+        }
+        else if((happiness >= 80)&& (happiness < 100))
+        {
+            gameVariables.resourcesInfo.finalGrade = "B";
+        }
+        else if ((happiness >= 60) && (happiness < 80))
+        {
+            gameVariables.resourcesInfo.finalGrade = "C";
+        }
+        else if ((happiness >= 40) && (happiness < 60))
+        {
+            gameVariables.resourcesInfo.finalGrade = "D";
+        }
+        else if ((happiness >= 20) && (happiness < 40))
+        {
+            gameVariables.resourcesInfo.finalGrade = "E";
+        }
+        else
+        {
+            gameVariables.resourcesInfo.finalGrade = "F";
+        }
     }
 }

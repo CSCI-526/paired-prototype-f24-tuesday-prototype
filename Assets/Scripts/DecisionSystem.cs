@@ -15,19 +15,23 @@ public class Decision
     public string date; // Store the date as a string (YYYY-MM-DD)
 }
 
-public class DecisionManager : MonoBehaviour
+public class DecisionSystem : MonoBehaviour
 {
     public GameObject decisionPanel;
     public List<Decision> decisions; // List of all decisions based on date
+
     private GameVariables gameVariables; // Reference to your GameVariables class
-    public Button decision1Button; // Button for option A
-    public Button decision2Button; // Button for option B
     private DaySystem daySystem;
+    private Button decision1Button; // Button for option A
+    private Button decision2Button; // Button for option B
 
     void Start()
     {
         gameVariables = GameObject.Find("Variables").GetComponent<GameVariables>();
         daySystem = GameObject.Find("IndependentSystems").GetComponent<DaySystem>();
+
+        decision1Button = decisionPanel.transform.Find("Button - Decision1").GetComponent<Button>();
+        decision2Button = decisionPanel.transform.Find("Button - Decision2").GetComponent<Button>();
         HideDecisionButtons(); // Initially hide the buttons
     }
 
@@ -42,7 +46,7 @@ public class DecisionManager : MonoBehaviour
             {
                 daySystem.TogglePause();
                 // panelControlSystem.OpenPanel(decisionPanel);
-                decisionPanel.SetActive(true);
+                GameObject.Find("Canvas").GetComponent<PanelControlSystem>().OpenPanel(decisionPanel);
                 ShowDecisionOptions(decision);
                 return;
             }
@@ -63,8 +67,8 @@ public class DecisionManager : MonoBehaviour
         decision2Button.onClick.RemoveAllListeners();
 
         // Add listeners with effects for each option
-        decision1Button.onClick.AddListener(() => ApplyDecisionEffects(decision.healthBudgetEffectA, decision.crimeBudgetEffectA));
-        decision2Button.onClick.AddListener(() => ApplyDecisionEffects(decision.healthBudgetEffectB, decision.crimeBudgetEffectB));
+        decision1Button.onClick.AddListener(() => ApplyDecisionEffects(decision.healthBudgetEffectA/100, decision.crimeBudgetEffectA/100));
+        decision2Button.onClick.AddListener(() => ApplyDecisionEffects(decision.healthBudgetEffectB/100, decision.crimeBudgetEffectB/100));
 
         // Show buttons when a new decision is available
         decision1Button.gameObject.SetActive(true);
@@ -73,25 +77,30 @@ public class DecisionManager : MonoBehaviour
 
     private void ApplyDecisionEffects(float healthEffect, float crimeEffect)
     {
-        // Calculate the true effects based on the current happiness score
         float happiness = gameVariables.resourcesInfo.happiness / 100f;
-
-        // Calculate the budget effects
-        float trueHealthBudget = healthEffect * happiness;
-        float trueCrimeBudget = crimeEffect * happiness;
-        float reservedBudget = 100f - (trueHealthBudget + trueCrimeBudget);
+        int availableMoney = gameVariables.resourcesInfo.money;
+        
+        int trueHealthBudget = (int)(healthEffect * happiness * availableMoney);
+        int trueCrimeBudget = (int)(crimeEffect * happiness * availableMoney);
+        int remainingMoney = availableMoney - (trueHealthBudget + trueCrimeBudget);
+        int constructionBudget = (int)(remainingMoney * 0.2f);
+        int newMoney = (int)(remainingMoney * 0.8f);
 
         // Update the budget variables in GameVariables
-        gameVariables.budgetInfo.health_budget = trueHealthBudget;
-        gameVariables.budgetInfo.crime_budget = trueCrimeBudget;
-        gameVariables.budgetInfo.reserved_budget = reservedBudget;
+        gameVariables.budgetInfo.healthBudget += trueHealthBudget;
+        gameVariables.budgetInfo.crimeBudget += trueCrimeBudget;
+        gameVariables.budgetInfo.constructionBudget += constructionBudget;
 
-        Debug.Log($"Health Budget: {trueHealthBudget}%, Crime Budget: {trueCrimeBudget}%, Reserved Budget: {reservedBudget}%");
+        // Update the money variable in ResourcesInfo
+        gameVariables.resourcesInfo.money = newMoney;
+
+        Debug.Log($"Health Budget: {trueHealthBudget}, Crime Budget: {trueCrimeBudget}, Construction Budget: {constructionBudget}, New Money: {newMoney}");
 
         // Hide buttons after a decision has been made & unpause
         HideDecisionButtons();
-        daySystem.TogglePause();
-        decisionPanel.SetActive(false);
+        //daySystem.TogglePause();
+        GetComponent<ConstructionSystem>().CheckBudget();
+        GameObject.Find("Canvas").GetComponent<PanelControlSystem>().OpenPanel(GameObject.Find("Canvas").transform.Find("Panel - Budget").gameObject);
     }
 
     private void HideDecisionButtons()

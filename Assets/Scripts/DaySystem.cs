@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class DaySystem : MonoBehaviour
 {
-    public GameObject sliderGameObject;
+    public GameObject TimeModule;
+    public GameObject FinalPage;
     public Text timeText;
     public int currentMonth;
     public bool todayIsNewMonth = false;
@@ -20,15 +21,9 @@ public class DaySystem : MonoBehaviour
 
     public void Init()
     {
-        if (sliderGameObject != null)
-        {
-            timeSlider = sliderGameObject.GetComponent<Slider>();
-            sliderFillImage = sliderGameObject.GetComponentInChildren<Image>();
-        }
-        if (timeSlider != null)
-        {
-            timeSlider.maxValue = repeatRate;
-        }
+        timeSlider = TimeModule.transform.Find("Slider").GetComponent<Slider>();
+        timeSlider.maxValue = repeatRate;
+        //sliderFillImage = TimeModule.transform.Find("Slider").GetComponentInChildren<Image>();
 
         gameVariables = GameObject.Find("Variables").GetComponent<GameVariables>();
         if (!DateTime.TryParse(gameVariables.systemInfo.currentDateTimeString, out currentDateTime))
@@ -79,9 +74,15 @@ public class DaySystem : MonoBehaviour
                 {
                     calculation.ApplyTaxes();
                 }
+                if (currentDateTime.ToString("yyyy-MM-dd") == "2024-04-01")
+                {
+                    gameVariables.systemInfo.pause = 1;
+                    calculation.FinalGradeCalculation();
+                    FinalPage.SetActive(true);
+                }
                 gameVariables.systemInfo.currentDateTimeString = currentDateTime.ToString("yyyy-MM-dd");
                 
-                GetComponent<DecisionManager>().EvaluateDecision();
+                GetComponent<DecisionSystem>().EvaluateDecision();
                 GetComponent<PopupEventSystem>().UpdateOnTick();
                 elapsedTime = 0;
                 if (timeSlider != null)
@@ -98,12 +99,12 @@ public class DaySystem : MonoBehaviour
     }
 
 
-    private void UpdateSliderColor(float normalizedTime)
-    {
-        Color dayColor = Color.cyan;
-        Color nightColor = Color.blue;
-        sliderFillImage.color = Color.Lerp(nightColor, dayColor, Mathf.PingPong(normalizedTime * 2, 1));
-    }
+    //private void UpdateSliderColor(float normalizedTime)
+    //{
+    //    Color dayColor = Color.cyan;
+    //    Color nightColor = Color.blue;
+    //    sliderFillImage.color = Color.Lerp(nightColor, dayColor, Mathf.PingPong(normalizedTime * 2, 1));
+    //}
 
     private void UpdateTimeText(float elapsedTime)
     {

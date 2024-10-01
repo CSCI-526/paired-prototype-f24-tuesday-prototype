@@ -33,18 +33,13 @@ public class PanelControlSystem : MonoBehaviour
         foreach (PanelButtonPair pair in panelButtonPairOnClickOthersDisappear)
         {
             Button button = pair.button.GetComponent<Button>();
-            button.onClick.AddListener(() => OnClickOthersDisappear());
+            button.onClick.AddListener(() => OpenPanel(pair.panel));
         }
-    }
-
-    public void OnClickOthersDisappear()
-    {
-        OpenPanel(EventSystem.current.currentSelectedGameObject);
     }
 
     public void OpenPanel(GameObject panel)
     {
-        PanelButtonPair clickedPair = panelButtonPairOnClickOthersDisappear.Find(pair => pair.button == panel);
+        PanelButtonPair clickedPair = panelButtonPairOnClickOthersDisappear.Find(pair => pair.panel == panel);
         if (currentPairOnClickOthersDisappear == null)
         {
             clickedPair.panel.SetActive(true);

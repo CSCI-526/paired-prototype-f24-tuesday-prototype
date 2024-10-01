@@ -50,7 +50,7 @@ public class PopupEventList
                 new Choice(
                     "Provide emergency medical funding! (-1000 health budget)",
                     new List<ChoiceEffect> {
-                        new ChoiceEffectAdd_f("healthBudget", -1000),
+                        new ChoiceEffectAdd_i("healthBudget", -1000),
                         new ChoiceEffectAdd_i("happiness", -10),
                         new ChoiceEffectAdd_i("healthRate", 25),
                         new ChoiceEffectAdd_i("population", -1000)
